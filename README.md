@@ -6,4 +6,4 @@ O projeto se trata de uma API RESTFUL para um sistema de midia social, onde os u
 - Seguir e Deixar de Seguir Outros Usuários
 - Visualizar o Feed
 
-![Sobre o Projeto](./docs/README.md)
+[Sobre o Projeto](./docs/README.md)
