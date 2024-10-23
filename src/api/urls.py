@@ -1,5 +1,5 @@
-from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
+
 from rest_framework import routers
 
 from . import views
@@ -7,6 +7,9 @@ from . import views
 router = routers.DefaultRouter()
 
 urlpatterns = [
+    path('auth', views.auth.AuthToken.as_view()),
+    path('auth/refresh', views.auth.AuthRefreshToken.as_view()),
+
     path('users', views.Users.as_view()),
     path('users/<uuid:uuid>', views.UserInfo.as_view()),
     
