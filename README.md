@@ -8,3 +8,7 @@ O projeto se trata de uma API RESTFUL para um sistema de midia social, onde os u
 
 As Views e Models foram separados em vários arquivos nas suas respectivas pastas para garantir um código mais limpo
 [Sobre o Projeto](./docs/README.md)
+
+### Banco de Dados
+O banco de dados está em Postgresql 16, porém a estrutura foi desenhada usando o MySQL Workbench
+![Estrutura do Banco de Dados](./docs/estrutura_db.png)
