@@ -26,10 +26,7 @@ SECRET_KEY = 'django-insecure-#hcs51v^o!lwfa7h%wt*2elv4ew(@5k)r!t9e@f19#ecn%s$@k
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    "localhost",
-    "192.168.1.68", # Ip do meu notebook para teste local
-]
+ALLOWED_HOSTS = [ ]
 
 
 # Application definition
@@ -45,7 +42,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
-    "mod_wsgi.server",
 ]
 
 MIDDLEWARE = [
