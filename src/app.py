@@ -1,17 +1,31 @@
 from flask import Flask
 from flask_jwt_extended import JWTManager
 
+from models import *
 from resources import Resources
 from error_handler import ErrorHandler
 
 app = Flask(__name__)
 app.register_blueprint(Resources)
 
-app.secret_key = "#hcs51v^o!lwfa7h%wt*2elv4ew(@5k)r!t9e@f19#ecn%s$@k"
-app.config["JWT_SECRET_KEY"] = app.secret_key
+import app_singleton
+
+app.config.from_object("config.development")
+if "DATABASE" in app.config:
+    db_config = app.config["DATABASE"]
+    db_uri = "{ENGINE}://{USER}:{PASSWORD}@{HOST}:{PORT}/{NAME}".format(
+        **db_config
+    )
+    
+    app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
 
 ErrorHandler(app)
 JWTManager(app)
+app_singleton.db.init_app(app)
+
+with app.app_context():
+    app_singleton.db.drop_all()
+    app_singleton.db.create_all()
 
 if __name__ == "__main__":
     app.run(

@@ -7,3 +7,4 @@ sys.path.insert(0, PROJECT_DIR)
 os.chdir(PROJECT_DIR)
 
 from app import app as application
+application.config.from_object("config.production")
