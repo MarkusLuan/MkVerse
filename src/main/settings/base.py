@@ -62,7 +62,8 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.JSONParser',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication', # JWT
+        'api.authentication.BasicAuthentication', # Basic Auth
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
@@ -161,3 +162,8 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 APPEND_SLASH = True
+
+# Sei que o ideal é usar o dot-venv e tal,
+# Mas essa autenticação servirá apenas para
+# Cadastrar novos usuários
+BASIC_API_KEY = '08df27301d6e87f6008afdb3b6cfebb0'

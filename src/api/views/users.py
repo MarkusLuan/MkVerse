@@ -2,8 +2,13 @@ import uuid
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.authentication import SessionAuthentication
+
+from api.authentication import BasicAuthentication
 
 class Users (APIView):
+    authentication_classes = [SessionAuthentication]
+
     def get(self, request):
         "Endpoint para procurar usuários"
 
@@ -14,6 +19,10 @@ class Users (APIView):
     
     def post(self, request):
         "Endpoint para criar Usuario"
+
+        self.authentication_classes = [BasicAuthentication]
+        print("tasdsnasjn")
+        self.check_permissions(request)
 
         return Response ({
             "testando": "ok1234",

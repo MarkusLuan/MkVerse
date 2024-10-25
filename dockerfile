@@ -17,6 +17,10 @@ RUN mod_wsgi-express install-module
 RUN chown -R www-data:www-data *
 RUN chmod -R 755 *
 
+# Subindo migrations
+RUN python3 manage.py makemigrations
+RUN python3 manage.py migrate
+
 # Subindo projeto
 EXPOSE 80
 CMD ["apachectl", "-D", "FOREGROUND"]
