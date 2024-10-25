@@ -1,5 +1,6 @@
-Django
-djangorestframework
-djangorestframework-simplejwt
+flask
+flask_restful
+flask-jwt-extended
 PyJWT
 psycopg2-binary
+python-dotenv
