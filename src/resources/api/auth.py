@@ -3,6 +3,7 @@ from flask import Blueprint
 from flask import request, jsonify, abort
 import flask_jwt_extended as jwt
 
+from models import User
 import app_singleton
 
 Resources = Blueprint("auth", __name__, url_prefix="/auth")
@@ -24,13 +25,17 @@ def gerar_token(identity):
 @Resources.route("/token", methods=["POST"])
 @app_singleton.basic_auth.required
 def get_token():
-    j = request.json
-    if not request.is_json or not j:
+    if not request.is_json:
         return abort(400)
     
+    j = request.get_json()
     username = j.get("username", None)
     password = j.get("password", None)
-    if username != "test" or password != "test":
+    
+    user = User.query.filter_by(nick=username).first()\
+        or User.query.filter_by(email=username).first()
+    
+    if not user or user.senha != password:
         return abort(401)
 
     return jsonify(gerar_token(username))
