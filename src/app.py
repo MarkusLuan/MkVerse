@@ -20,7 +20,7 @@ if "DATABASE" in app.config:
     app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
     app.config["SQLALCHEMY_TRACK_NOTIFICATIONS"] = False
 
-app_singleton.jwt.init_app(app, True)
+app_singleton.jwt.init_app(app)
 app_singleton.basic_auth.init_app(app)
 app_singleton.db.init_app(app)
 ErrorHandler(app)
