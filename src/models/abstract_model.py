@@ -1,11 +1,12 @@
-from sqlalchemy import Uuid, DateTime
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import Uuid, DateTime, sql
 
 from app_singleton import db
+
+import uuid, datetime
 
 class AbstractModel (db.Model):
     __abstract__ = True
     
     id = db.Column(db.Integer, primary_key=True)
-    uuid = db.Column(Uuid, unique=True, nullable=False)
-    dt_criacao = db.Column(DateTime, unique=True, nullable=False)
+    uuid = db.Column(Uuid, default=lambda: str(uuid.uuid4()), unique=True, nullable=False)
+    dt_criacao = db.Column(DateTime, default=sql.func.now(), unique=True, nullable=False)
