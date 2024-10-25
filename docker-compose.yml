@@ -1,8 +1,9 @@
-version: "3.9"
 services:
     mkverse_db:
         image: postgres:16
         container_name: mkverse_db
+        ports:
+            - "5432:5432"
         environment: 
             - POSTGRES_DB=mkverse_db
             - POSTGRES_USER=mkverse_db_user
