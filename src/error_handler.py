@@ -1,12 +1,9 @@
 from flask import Flask, request
 from flask import make_response
+from werkzeug.exceptions import HTTPException
 
 class ErrorHandler:
     def __init__(self, app: Flask):
-        def __is_from_ajax():
-            request_xhr_key = request.headers.get('X-Requested-With')
-            return request_xhr_key and request_xhr_key == 'XMLHttpRequest'
-        
         def __reportar_erro(erro: str, status_code: int):
             print(erro)
 
@@ -14,10 +11,6 @@ class ErrorHandler:
                 "erro": True,
                 "texto": str(erro)
             }, status_code)
-        
-        @app.errorhandler(Exception)
-        def erro_tratado(e):
-            return __reportar_erro(e, 500)
         
         @app.errorhandler(401)
         def nao_autorizado(e):
@@ -30,3 +23,11 @@ class ErrorHandler:
         @app.errorhandler(404)
         def nao_encontrato(e):
             return __reportar_erro("Recurso não encontrado!", 404)
+        
+        @app.errorhandler(HTTPException)
+        def erro_http(e: HTTPException):
+            return __reportar_erro(e.description, e.code)
+
+        @app.errorhandler(Exception)
+        def erro_tratado(e: Exception):
+            return __reportar_erro(e, 500)
