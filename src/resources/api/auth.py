@@ -3,7 +3,7 @@ from flask import Blueprint
 from flask import request, jsonify, abort
 import flask_jwt_extended as jwt
 
-import uuid
+import app_singleton
 
 Resources = Blueprint("auth", __name__, url_prefix="/auth")
 
@@ -22,6 +22,7 @@ def gerar_token(identity):
     return res
 
 @Resources.route("/token", methods=["POST"])
+@app_singleton.basic_auth.required
 def get_token():
     j = request.json
     if not request.is_json or not j:

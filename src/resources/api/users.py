@@ -2,6 +2,7 @@ from flask import Blueprint
 import flask_restful as Rest
 
 import uuid
+import app_singleton
 
 class Users (Rest.Resource):
     def get(self):
@@ -12,6 +13,7 @@ class Users (Rest.Resource):
             "metodo": "get"
         }
     
+    @app_singleton.basic_auth.required
     def post(self):
         "Endpoint para criar Usuario"
 
