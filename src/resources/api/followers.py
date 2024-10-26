@@ -3,6 +3,7 @@ from flask import abort
 import flask_restful as Rest
 import flask_jwt_extended as jwt
 from werkzeug.exceptions import BadRequest
+from sqlalchemy import and_
 from sqlalchemy.orm import aliased
 
 import uuid
@@ -49,6 +50,16 @@ class Followers (Rest.Resource):
         user = models.User.query.filter_by(
             uuid = uuid_user
         ).first_or_404("Usuario não encontrado!")
+
+        # Checa se já segue
+        follower = models.Followers.query.filter(
+            and_(
+                models.Followers.seguidor_id == logged_user.id,
+                models.Followers.seguindo_id == user.id
+            )
+        ).first()
+        if follower:
+            raise Exception(f"Você já segue {user.nick}!")
 
         follower = models.Followers(
             seguidor_id = logged_user.id,
