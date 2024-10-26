@@ -32,24 +32,18 @@ class Users (Rest.Resource):
             return abort(400)
         
         j: dict = request.get_json()
-        try:
-            utils.checar_campos_obrigatorios(j, [
-                "dt_nascimento",
-                "username",
-                "nome",
-                "email",
-                "bio",
-                "password",
-            ])
-        except ValueError as e:
-            raise BadRequest(str(e))
+        utils.checar_campos_obrigatorios(j, [
+            "dt_nascimento",
+            "username",
+            "nome",
+            "email",
+            "bio",
+            "password",
+        ])
         
-        # Removendo campos que são gerados automaticamente
-        for campo in ["id", "uuid", "dt_criacao"]:
-            if campo in j:
-                del j[campo]
+        utils.remover_campos(j, ["id", "uuid", "dt_criacao"])
         
-        # Pequena troca para confundir SQL Injection
+        # Pequena troca para confundir SQL Injection - Sei que não é o bastante, mas...
         j["nick"] = j.pop("username")
         j["senha"] = j.pop("password")
         user = models.User(**j)

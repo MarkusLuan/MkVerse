@@ -1,17 +1,19 @@
 import datetime
 import re
 
+from werkzeug.exceptions import BadRequest
+
 def checar_campos_obrigatorios(j: dict, campos_obrigatorios: list):
     pattern_email = re.compile(r"(\w+)\@(\w{3,}[\w\.]{0,})")
 
     for campo in campos_obrigatorios:
         # Valida se o campo foi informado
         if campo not in j:
-            raise ValueError(f"O campo '{campo}' não foi informado!")
+            raise BadRequest(f"O campo '{campo}' não foi informado!")
 
         # Valida campo de e-mail
         if campo == "email" and not pattern_email.match(j[campo]):
-            raise ValueError("O endereço de e-mail é invalido!")
+            raise BadRequest("O endereço de e-mail é invalido!")
         
         # Valida os campos de data
         if campo.startswith("dt_"):
@@ -35,4 +37,11 @@ def checar_campos_obrigatorios(j: dict, campos_obrigatorios: list):
             if data:
                 j[campo] = data
             else:
-                raise ValueError(f"O campo '{campo}' não foi preenchido corretamente!\nData deverá ser informada nos seguintes formatos {formatos_data_str}")
+                raise BadRequest(f"O campo '{campo}' não foi preenchido corretamente!\nData deverá ser informada nos seguintes formatos {formatos_data_str}")
+
+def remover_campos(j: dict, campos: list):
+    "Função para remover campos de um json"
+
+    for campo in campos:
+        if campo in j:
+            del j[campo]
