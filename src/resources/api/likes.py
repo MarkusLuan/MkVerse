@@ -32,8 +32,6 @@ class Likes (Rest.Resource):
         if str(feed.user.uuid) == str(uuid_logged_user):
             raise BadRequest("Você não pode curtir sua propria postagem!")
         
-        print("Aqui 3")
-        
         like = models.Likes.query.filter(and_(
             models.Likes.feed_id == feed.id,
             models.Likes.user_id == user.id
@@ -52,15 +50,45 @@ class Likes (Rest.Resource):
         app_singleton.db.session.merge(feed)
         app_singleton.db.session.commit()
         
-        return like.to_json()
+        return feed.to_json()
     
     def delete(self, uuid_feed: uuid.UUID):
         "Endpoint para descurtir uma postagem"
+        
+        uuid_logged_user = jwt.get_jwt_identity()
+        user = models.User.query.filter_by(
+            uuid = str(uuid_logged_user)
+        ).first()
+        if not user:
+            return abort(401)
+        
+        feed = models.Feed.query.filter(and_(
+            models.Feed.uuid == str(uuid_feed),
+            models.Feed.dt_remocao == None
+        )).first_or_404("Postagem não encontrada!")
 
-        return {
-            "testando": "ok1234",
-            "metodo": "delete"
-        }
+        # Atualiza a contagem de likes em cache
+        feed.likes -= 1
+        
+        if str(feed.user.uuid) == str(uuid_logged_user):
+            raise BadRequest("Você não pode curtir sua propria postagem!")
+        
+        like = models.Likes.query.filter(and_(
+            models.Likes.feed_id == feed.id,
+            models.Likes.user_id == user.id
+        )).first()
+
+        if not like:
+            raise BadRequest("Você ainda não curtiu essa postagem!")
+        
+        # Realiza remoção fisica
+        app_singleton.db.session.delete(like)
+        
+        # Finaliza as gravações
+        app_singleton.db.session.merge(feed)
+        app_singleton.db.session.commit()
+
+        return feed.to_json()
 
 # Registra endpoint
 Resources = Blueprint("likes", __name__, url_prefix="/likes")
