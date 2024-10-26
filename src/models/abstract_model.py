@@ -1,4 +1,4 @@
-from sqlalchemy import Uuid, DateTime, sql
+from sqlalchemy import BigInteger, Uuid, DateTime, sql
 
 from app_singleton import db
 
@@ -8,7 +8,7 @@ class AbstractModel (db.Model):
     __abstract__ = True
     fields = []
     
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(BigInteger, primary_key=True)
     uuid = db.Column(Uuid, default=lambda: str(uuid.uuid4()), unique=True, nullable=False)
     dt_criacao = db.Column(DateTime, default=sql.func.now(), nullable=False)
 
