@@ -35,4 +35,4 @@
 ### Observações
 <p>* Particulamente só tinha visto o Django por cima, normalmente uso o Flask, mas vou arriscar fazer esse projeto em Django por conta dos testes unitários ser melhor de se fazer. Caso, eu não consiga após 2 dias irei para o Flask que estou mais acostumado.</p>
 
-<p>** Irei usar o Swagger por ser mais pratico, mesmo sendo familiarizado com as duas ferramentas</p>
+<p>** Mesmo sendo familiarizado com as duas ferramentas, fiz a documentação no Postman já que era a ferramenta que estava usando para testes</p>

@@ -42,7 +42,7 @@ def get_token():
     if not user or user.senha != password:
         return abort(401)
 
-    return jsonify(gerar_token(username))
+    return jsonify(gerar_token(user.uuid))
 
 @Resources.route("/refresh", methods=["POST"])
 @jwt.jwt_required(refresh=True)
