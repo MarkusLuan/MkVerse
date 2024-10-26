@@ -1,4 +1,5 @@
-from sqlalchemy import BigInteger, Uuid, DateTime, sql
+from sqlalchemy import BigInteger, DateTime, sql
+from sqlalchemy.dialects.postgresql import UUID as Uuid
 
 from app_singleton import db
 

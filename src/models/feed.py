@@ -1,4 +1,5 @@
-from sqlalchemy import BigInteger, Uuid, DateTime, ForeignKey
+from sqlalchemy import BigInteger, DateTime, ForeignKey
+from sqlalchemy.dialects.postgresql import UUID as Uuid
 
 from .abstract_model import AbstractModel
 from app_singleton import db
