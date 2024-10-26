@@ -12,11 +12,12 @@ Ao final do projeto irei fazer o merge com a Master
 ### Descrição
 O projeto se trata de uma API RESTFUL para um sistema de midia social, onde os usuários poderão:
 - [x] Registrar e Autenticar
-- [x] Criar, Editar, Deletar
+- [x] Criar, Editar e Deletar Postagem
 - [ ] Curtir Postagens
+- [ ] Postar imagem
 - [x] Seguir e Deixar de Seguir Outros Usuários
 - [x] Visualizar o Feed
-- [ ] Mostrar apenas postagens dos usuários seguidos
+- [x] Mostrar apenas postagens dos usuários seguidos
 
 As Views e Models foram separados em vários arquivos nas suas respectivas pastas para garantir um código mais limpo.
 
