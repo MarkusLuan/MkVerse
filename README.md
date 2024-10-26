@@ -81,3 +81,6 @@ pip install -r requirements.txt
 python app.py
 ```
 4. Caso deseje alterar alguma configuração do banco (como porta, senha, ou host) ou a chave da API basta acessar a pasta [config](./src/config/) e alterar o arquivo [base.py](./src/config/base.py) ou [development.py](./src/config/development.py)
+
+### Observação
+- No meio do projeto fui atacado por RANSON, graças a Deus o projeto estava no outro HD e tinha commitado algumas coisas. Pena que vou perder um tempo reconfigurando algumas coisas no outro PC.
