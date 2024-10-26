@@ -71,12 +71,14 @@ class Feed (Rest.Resource):
 
         return feed.to_json()
     
-    def delete(self, uuid: uuid.UUID):
+    def delete(self, uuid_feed: uuid.UUID):
         "Endpoint para deletar postagem de forma virtual"
 
         logged_user = jwt.get_jwt_identity()
-        feed = models.Feed.query.filter(and_(
-            models.Feed.uuid == uuid,
+        feed = models.Feed.query.join(
+            models.User, models.User.id == models.Feed.user_id
+        ).filter(and_(
+            models.Feed.uuid == uuid_feed,
             models.Feed.dt_remocao == None,
             models.User.uuid == logged_user
         )).first_or_404()
@@ -90,4 +92,4 @@ class Feed (Rest.Resource):
 # Registra endpoint
 Resources = Blueprint("feed", __name__, url_prefix="/feed")
 api = Rest.Api(Resources)
-api.add_resource(Feed, "/", "/<uuid:uuid>")
+api.add_resource(Feed, "/", "/<uuid:uuid_feed>")
