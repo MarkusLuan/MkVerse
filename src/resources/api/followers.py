@@ -14,10 +14,20 @@ class Followers (Rest.Resource):
     def get(self):
         "Endpoint para listar seguidores do usuário logado"
 
-        return {
-            "testando": "ok1234",
-            "metodo": "get"
+        logged_user = jwt.get_jwt_identity()
+        followers = models.Followers.query.join(
+            models.User,
+            models.Followers.seguindo_id == models.User.id
+        ).filter(
+            models.User.uuid == logged_user
+        ).all()
+
+        res = {
+            "dt_consulta": datetime.datetime.now().isoformat(),
+            "seguidores": [follower.seguidor.nick for follower in followers]
         }
+
+        return res
     
     def post(self, uuid: uuid.UUID):
         "Endpoint para seguir um usuário"
