@@ -1,15 +1,15 @@
 # Sobre o projeto
 
 ### Requisitos
-- Python 3
-- Com algum framework Web (Preferencia Django) *
-- Autenticação com JWT
-- Banco de Dados de preferencia PostgreSQL
-- Sistema de cache
-- Paginação
-- Testes unitários
-- Documentação com Swagger ou Postman **
-- Docker com o Docker-compose
+- [x] Python 3
+- [x] Com algum framework Web (Preferencia Django) *
+- [x] Autenticação com JWT
+- [x] Banco de Dados de preferencia PostgreSQL
+- [x] Sistema de cache para os likes
+- [ ] Paginação
+- [ ] Testes unitários
+- [x] Documentação com Swagger ou Postman **
+- [x] Docker com o Docker-compose
 
 ### Casos de uso
 - Caso 1: Cadastro
