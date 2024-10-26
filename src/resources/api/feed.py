@@ -2,7 +2,7 @@ from flask import Blueprint
 from flask import request, abort
 import flask_restful as Rest
 import flask_jwt_extended as jwt
-from sqlalchemy import and_
+from sqlalchemy import and_, or_, desc
 
 import uuid
 import datetime
@@ -15,15 +15,28 @@ class Feed (Rest.Resource):
     def get(self):
         "Endpoint para carregar o feed do usuário logado"
 
-        # TODO: Filtrar por:
-        # * Usuario Logado - OK
-        # * Usuarios Seguidos - FALTANDO
-        # * Data Remoção = Null - OK
-        logged_user = jwt.get_jwt_identity()
-        feed = models.Feed.query.filter(and_(
+        uuid_logged_user = jwt.get_jwt_identity()
+        
+        # TODO: Fazer uma unica query
+        # Obtem o usuario
+        user = models.User.query.filter_by(
+            uuid = uuid_logged_user
+        ).first()
+        if not user:
+            return abort(401)
+
+        feed = models.Feed.query.outerjoin(
+            models.Followers,
+            models.Followers.seguindo_id == models.Feed.user_id
+        ).filter(and_(
             models.Feed.dt_remocao == None,
-            models.User.uuid == logged_user
-        )).all()
+            or_(
+                models.Feed.user_id == user.id,
+                models.Followers.seguidor_id == user.id,
+            )
+        )).order_by(
+            desc(models.Feed.dt_criacao)
+        ).all()
 
         return [postagem.to_json() for postagem in feed]
     

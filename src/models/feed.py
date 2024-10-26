@@ -17,5 +17,6 @@ class Feed (AbstractModel):
     def to_json(self):
         j = super().to_json()
 
+        j["created_by"] = self.user.nick
         j["uuid_imagem"] = str(self.uuid_imagem) if self.uuid_imagem else None
         return j
