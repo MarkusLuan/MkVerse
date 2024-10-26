@@ -1,7 +1,14 @@
+import datetime
 from flask import Blueprint
+from flask import abort
 import flask_restful as Rest
+import flask_jwt_extended as jwt
+from werkzeug.exceptions import BadRequest
 
 import uuid
+
+import models
+import app_singleton
 
 class Followers (Rest.Resource):
     def get(self):
@@ -15,10 +22,32 @@ class Followers (Rest.Resource):
     def post(self, uuid: uuid.UUID):
         "Endpoint para seguir um usuário"
 
-        return {
-            "testando": "ok1234",
-            "metodo": "post"
-        }
+        # Evitar que o usuário siga ele mesmo
+        uuid_logged_user = jwt.get_jwt_identity()
+        if str(uuid_logged_user) == str(uuid):
+            raise BadRequest("Não é possivel seguir você mesmo!")
+
+        # Checa e Obtem Usuario Logado
+        logged_user = models.User.query.filter_by(
+            uuid = uuid_logged_user
+        ).first()
+        if not logged_user:
+            return abort(401)
+        
+        # Checa e Obtem Usuario Informado
+        user = models.User.query.filter_by(
+            uuid = uuid
+        ).first_or_404()
+
+        follower = models.Followers(
+            seguidor_id = logged_user.id,
+            seguindo_id = user.id
+        )
+
+        app_singleton.db.session.add(follower)
+        app_singleton.db.session.commit()
+
+        return follower.to_json()
     
     def delete(self, uuid: uuid.UUID):
         "Endpoint para deixar de seguir um usuário"
