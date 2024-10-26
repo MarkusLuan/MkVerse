@@ -12,7 +12,7 @@ O projeto se trata de uma API RESTFUL para um sistema de midia social, onde os u
 - [x] Registrar e Autenticar
 - [x] Criar, Editar, Deletar
 - [ ] Curtir Postagens
-- [ ] Seguir e Deixar de Seguir Outros Usuários
+- [x] Seguir e Deixar de Seguir Outros Usuários
 - [x] Visualizar o Feed
 - [ ] Mostrar apenas postagens dos usuários seguidos
 

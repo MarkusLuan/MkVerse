@@ -1,11 +1,12 @@
-import datetime
 from flask import Blueprint
 from flask import abort
 import flask_restful as Rest
 import flask_jwt_extended as jwt
 from werkzeug.exceptions import BadRequest
+from sqlalchemy.orm import aliased
 
 import uuid
+import datetime
 
 import models
 import app_singleton
@@ -47,7 +48,7 @@ class Followers (Rest.Resource):
         # Checa e Obtem Usuario Informado
         user = models.User.query.filter_by(
             uuid = uuid_user
-        ).first_or_404()
+        ).first_or_404("Usuario não encontrado!")
 
         follower = models.Followers(
             seguidor_id = logged_user.id,
@@ -62,10 +63,33 @@ class Followers (Rest.Resource):
     def delete(self, uuid_user: uuid.UUID):
         "Endpoint para deixar de seguir um usuário - Deleta fisicamente do DB"
 
-        return {
-            "testando": "ok1234",
-            "metodo": "delete"
-        }
+        # Evitar que o usuário siga ele mesmo
+        uuid_logged_user = jwt.get_jwt_identity()
+        if str(uuid_logged_user) == str(uuid_user):
+            raise BadRequest("Não é possivel deixar de seguir você mesmo!")
+        
+        user_seguindo = aliased(models.User)
+        user_seguidor = aliased(models.User)
+        
+        follower = models.Followers.query.join(
+            user_seguindo, models.Followers.seguindo
+        ).join(
+            user_seguidor, models.Followers.seguidor
+        ).filter(
+            user_seguindo.uuid == uuid_user,
+            user_seguidor.uuid == uuid_logged_user,
+        ).first_or_404("Você não segue este usuário!")
+
+        # Hack para carregar os atributos Lazy Load
+        _, _ = follower.seguidor, follower.seguindo
+
+        # Remoção Fisica
+        # Como não tem outra relação não seria um problema
+        # e também poupa espaço no banco
+        app_singleton.db.session.delete(follower)
+        app_singleton.db.session.commit()
+
+        return follower.to_json()
         
 # Registra endpoint
 Resources = Blueprint("followers", __name__, url_prefix="/followers")
