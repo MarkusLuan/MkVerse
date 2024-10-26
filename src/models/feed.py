@@ -14,7 +14,7 @@ class Feed (AbstractModel):
     
     user = db.relationship("User")
 
-    def __to_json(self):
+    def to_json(self):
         j = super().to_json()
 
         j["uuid_imagem"] = str(self.uuid_imagem) if self.uuid_imagem else None
