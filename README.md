@@ -30,7 +30,7 @@ O banco de dados está em Postgresql 16, porém a estrutura foi desenhada usando
 
 ### Documentações
 - [Sobre o Projeto](./docs/README.md)
-- [Documentação em Postman](./docs/MkVerse%20-%20Teste%20B2Bit.postman_collection.json)
+- [Documentação em Postman](./docs/postman.json)
 - [Estrutura do Projeto](./docs/estrutura_projeto.md)
 
 ---
