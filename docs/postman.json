@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "a1c1ec41-071a-4092-8c5a-6b2d3231005e",
+		"_postman_id": "5a275633-ebe1-4e66-8df1-63c5b1f30da2",
 		"name": "MkVerse - Teste B2Bit",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "10067182"
@@ -65,7 +65,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "INFORMAR_JWT_TOKEN",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyOTk4MjI1OSwianRpIjoiODIwNjE3NDItNDJkOC00MDAyLTkxNjUtYzBjOTk2ZGVmMjJhIiwidHlwZSI6InJlZnJlc2giLCJzdWIiOiJlYTdmMTE0ZC1jMDdiLTRjMTEtYjEyYS0wMWQ1OWEyN2JiMmQiLCJuYmYiOjE3Mjk5ODIyNTksImNzcmYiOiI5YzgwZDIzZi00MmVlLTRlNjQtOTAzYS05NzU3NDU0M2FmYjYiLCJleHAiOjE3Mjk5ODU4NTl9.nAWa8HgCNlhfB_ATStGOAvE1-6hF0_LXzExr6EBgLcU",
 									"type": "string"
 								}
 							]
@@ -79,12 +79,11 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}/api/auth/refresh",
+							"raw": "{{url}}/auth/refresh",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"api",
 								"auth",
 								"refresh"
 							]
@@ -144,7 +143,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "INFORMAR_JWT_TOKEN",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyOTk4MjI1OSwianRpIjoiOTBkYjU4Y2EtMmI2YS00YmExLThjYWItOWRiZjljODE4MjBkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImVhN2YxMTRkLWMwN2ItNGMxMS1iMTJhLTAxZDU5YTI3YmIyZCIsIm5iZiI6MTcyOTk4MjI1OSwiY3NyZiI6ImM4YjhiNTMwLWYwNDctNDdkMy05ZmUyLWMzOGFlNzU0OGQ3NCIsImV4cCI6MTcyOTk4NTg1OX0.WzSD2vEOCYhhS9ZXEQ_0Qzxsd3u4_zFialrgGIMryNw",
 									"type": "string"
 								}
 							]
@@ -158,13 +157,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}/users/92426a14-5527-4639-9cc5-2f9abf609581",
+							"raw": "{{url}}/users/0fc30247-c875-4230-a163-f21600154884",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"users",
-								"92426a14-5527-4639-9cc5-2f9abf609581"
+								"0fc30247-c875-4230-a163-f21600154884"
 							]
 						}
 					},
@@ -230,7 +229,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "INFORMAR_JWT_TOKEN",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyOTk4MjI1OSwianRpIjoiOTBkYjU4Y2EtMmI2YS00YmExLThjYWItOWRiZjljODE4MjBkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImVhN2YxMTRkLWMwN2ItNGMxMS1iMTJhLTAxZDU5YTI3YmIyZCIsIm5iZiI6MTcyOTk4MjI1OSwiY3NyZiI6ImM4YjhiNTMwLWYwNDctNDdkMy05ZmUyLWMzOGFlNzU0OGQ3NCIsImV4cCI6MTcyOTk4NTg1OX0.WzSD2vEOCYhhS9ZXEQ_0Qzxsd3u4_zFialrgGIMryNw",
 									"type": "string"
 								}
 							]
@@ -263,7 +262,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "INFORMAR_JWT_TOKEN",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyOTk4MjI1OSwianRpIjoiOTBkYjU4Y2EtMmI2YS00YmExLThjYWItOWRiZjljODE4MjBkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImVhN2YxMTRkLWMwN2ItNGMxMS1iMTJhLTAxZDU5YTI3YmIyZCIsIm5iZiI6MTcyOTk4MjI1OSwiY3NyZiI6ImM4YjhiNTMwLWYwNDctNDdkMy05ZmUyLWMzOGFlNzU0OGQ3NCIsImV4cCI6MTcyOTk4NTg1OX0.WzSD2vEOCYhhS9ZXEQ_0Qzxsd3u4_zFialrgGIMryNw",
 									"type": "string"
 								}
 							]
@@ -276,6 +275,15 @@
 								"type": "default"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"texto\": \"olá, testando postagem\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{url}}/feed",
 							"host": [
@@ -296,7 +304,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "INFORMAR_JWT_TOKEN",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyOTk4MjI1OSwianRpIjoiOTBkYjU4Y2EtMmI2YS00YmExLThjYWItOWRiZjljODE4MjBkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImVhN2YxMTRkLWMwN2ItNGMxMS1iMTJhLTAxZDU5YTI3YmIyZCIsIm5iZiI6MTcyOTk4MjI1OSwiY3NyZiI6ImM4YjhiNTMwLWYwNDctNDdkMy05ZmUyLWMzOGFlNzU0OGQ3NCIsImV4cCI6MTcyOTk4NTg1OX0.WzSD2vEOCYhhS9ZXEQ_0Qzxsd3u4_zFialrgGIMryNw",
 									"type": "string"
 								}
 							]
@@ -310,13 +318,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}/feed/92426a14-5527-4639-9cc5-2f9abf609581",
+							"raw": "{{url}}/feed/2399f134-2d0c-46fe-aa01-9991dbd64e4a",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"feed",
-								"92426a14-5527-4639-9cc5-2f9abf609581"
+								"2399f134-2d0c-46fe-aa01-9991dbd64e4a"
 							]
 						}
 					},
@@ -327,6 +335,40 @@
 		{
 			"name": "Likes",
 			"item": [
+				{
+					"name": "Listar curtidas",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyOTk4MjI1OSwianRpIjoiOTBkYjU4Y2EtMmI2YS00YmExLThjYWItOWRiZjljODE4MjBkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImVhN2YxMTRkLWMwN2ItNGMxMS1iMTJhLTAxZDU5YTI3YmIyZCIsIm5iZiI6MTcyOTk4MjI1OSwiY3NyZiI6ImM4YjhiNTMwLWYwNDctNDdkMy05ZmUyLWMzOGFlNzU0OGQ3NCIsImV4cCI6MTcyOTk4NTg1OX0.WzSD2vEOCYhhS9ZXEQ_0Qzxsd3u4_zFialrgGIMryNw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWxhZGRpbjpvcGVuc2VzYW1l",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/likes/2399f134-2d0c-46fe-aa01-9991dbd64e4a",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"likes",
+								"2399f134-2d0c-46fe-aa01-9991dbd64e4a"
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "Deixar Like",
 					"request": {
@@ -408,7 +450,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "INFORMAR_JWT_TOKEN",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyOTk4MjI1OSwianRpIjoiOTBkYjU4Y2EtMmI2YS00YmExLThjYWItOWRiZjljODE4MjBkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImVhN2YxMTRkLWMwN2ItNGMxMS1iMTJhLTAxZDU5YTI3YmIyZCIsIm5iZiI6MTcyOTk4MjI1OSwiY3NyZiI6ImM4YjhiNTMwLWYwNDctNDdkMy05ZmUyLWMzOGFlNzU0OGQ3NCIsImV4cCI6MTcyOTk4NTg1OX0.WzSD2vEOCYhhS9ZXEQ_0Qzxsd3u4_zFialrgGIMryNw",
 									"type": "string"
 								}
 							]
