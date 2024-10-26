@@ -1,15 +1,15 @@
 # Sobre o projeto
 
 ### Requisitos
-- Python 3
-- Com algum framework Web (Preferencia Django) *
-- Autenticação com JWT
-- Banco de Dados de preferencia PostgreSQL
-- Sistema de cache
-- Paginação
-- Testes unitários
-- Documentação com Swagger ou Postman **
-- Docker com o Docker-compose
+- [x] Python 3
+- [x] Com algum framework Web (Preferencia Django) *
+- [x] Autenticação com JWT
+- [x] Banco de Dados de preferencia PostgreSQL
+- [x] Sistema de cache para sistema de likes
+- [ ] Paginação
+- [ ] Testes unitários
+- [x] Documentação com Swagger ou Postman **
+- [x] Docker com o Docker-compose
 
 ### Casos de uso
 - Caso 1: Cadastro
@@ -26,11 +26,11 @@
     - As postagens devem ser ordernadas pela data de criação, do mais recente ao mais antigo
 
 ### Bonus - Provavelmente não consiga concluir a tempo
-- Limitador de banda nos endpoints para evitar abuso
-- Prevenção de SQL Injection
-- Tarefas async com Celery ou outra ferramenta
-- Sistema de busca
-- Continuos Integration (Github Actions para testes)
+- [ ] Limitador de banda nos endpoints para evitar abuso
+- [ ] Prevenção de SQL Injection
+- [ ] Tarefas async com Celery ou outra ferramenta
+- [x] Sistema de busca
+- [ ] Continuos Integration (Github Actions para testes)
 
 ### Observações
 <p>* Particulamente só tinha visto o Django por cima, normalmente uso o Flask, mas vou arriscar fazer esse projeto em Django por conta dos testes unitários ser melhor de se fazer. Caso, eu não consiga após 2 dias irei para o Flask que estou mais acostumado.</p>
