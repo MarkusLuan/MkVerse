@@ -1,4 +1,4 @@
-from sqlalchemy import BigInteger, DateTime, sql
+from sqlalchemy import BigInteger, Uuid, DateTime, sql
 
 from app_singleton import db
 
@@ -9,7 +9,7 @@ class AbstractModel (db.Model):
     fields = []
     
     id = db.Column(BigInteger, primary_key=True)
-    uuid = db.Column(db.Uuid, default=lambda: str(uuid.uuid4()), unique=True, nullable=False)
+    uuid = db.Column(Uuid, default=lambda: str(uuid.uuid4()), unique=True, nullable=False)
     dt_criacao = db.Column(DateTime, default=sql.func.now(), nullable=False)
 
     def to_json(self):
