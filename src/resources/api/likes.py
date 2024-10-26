@@ -1,18 +1,60 @@
 from flask import Blueprint
+from flask import abort
 import flask_restful as Rest
+import flask_jwt_extended as jwt
+from werkzeug.exceptions import BadRequest
+from sqlalchemy import and_
 
 import uuid
 
+import models
+import app_singleton
+
 class Likes (Rest.Resource):
-    def post(self, uuid: uuid.UUID):
+    def post(self, uuid_feed: uuid.UUID):
         "Endpoint para curtir uma postagem"
 
-        return {
-            "testando": "ok1234",
-            "metodo": "post"
-        }
+        uuid_logged_user = jwt.get_jwt_identity()
+        user = models.User.query.filter_by(
+            uuid = uuid_logged_user
+        ).first()
+        if not user:
+            return abort(401)
+        
+        feed = models.Feed.query.filter(and_(
+            models.Feed.uuid == str(uuid_feed),
+            models.Feed.dt_remocao == None
+        )).first_or_404("Postagem não encontrada!")
+
+        # Atualiza a contagem em cache de likes
+        feed.likes += 1
+        
+        if str(feed.user.uuid) == str(uuid_logged_user):
+            raise BadRequest("Você não pode curtir sua propria postagem!")
+        
+        print("Aqui 3")
+        
+        like = models.Likes.query.filter(and_(
+            models.Likes.feed_id == feed.id,
+            models.Likes.user_id == user.id
+        )).first()
+
+        if like:
+            raise BadRequest("Você já curtiu essa postagem!")
+        
+        like = models.Likes(
+            user_id = user.id,
+            feed_id = feed.id
+        )
+        
+        # Finaliza as gravações
+        app_singleton.db.session.add(like)
+        app_singleton.db.session.merge(feed)
+        app_singleton.db.session.commit()
+        
+        return like.to_json()
     
-    def delete(self, uuid: uuid.UUID):
+    def delete(self, uuid_feed: uuid.UUID):
         "Endpoint para descurtir uma postagem"
 
         return {
@@ -23,4 +65,4 @@ class Likes (Rest.Resource):
 # Registra endpoint
 Resources = Blueprint("likes", __name__, url_prefix="/likes")
 api = Rest.Api(Resources)
-api.add_resource(Likes, "/<uuid:uuid>")
+api.add_resource(Likes, "/<uuid:uuid_feed>")
