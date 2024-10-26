@@ -29,12 +29,12 @@ class Followers (Rest.Resource):
 
         return res
     
-    def post(self, uuid: uuid.UUID):
+    def post(self, uuid_user: uuid.UUID):
         "Endpoint para seguir um usuário"
 
         # Evitar que o usuário siga ele mesmo
         uuid_logged_user = jwt.get_jwt_identity()
-        if str(uuid_logged_user) == str(uuid):
+        if str(uuid_logged_user) == str(uuid_user):
             raise BadRequest("Não é possivel seguir você mesmo!")
 
         # Checa e Obtem Usuario Logado
@@ -46,7 +46,7 @@ class Followers (Rest.Resource):
         
         # Checa e Obtem Usuario Informado
         user = models.User.query.filter_by(
-            uuid = uuid
+            uuid = uuid_user
         ).first_or_404()
 
         follower = models.Followers(
@@ -59,8 +59,8 @@ class Followers (Rest.Resource):
 
         return follower.to_json()
     
-    def delete(self, uuid: uuid.UUID):
-        "Endpoint para deixar de seguir um usuário"
+    def delete(self, uuid_user: uuid.UUID):
+        "Endpoint para deixar de seguir um usuário - Deleta fisicamente do DB"
 
         return {
             "testando": "ok1234",
@@ -70,4 +70,4 @@ class Followers (Rest.Resource):
 # Registra endpoint
 Resources = Blueprint("followers", __name__, url_prefix="/followers")
 api = Rest.Api(Resources)
-api.add_resource(Followers, "/", "/<uuid:uuid>")
+api.add_resource(Followers, "/", "/<uuid:uuid_user>")
