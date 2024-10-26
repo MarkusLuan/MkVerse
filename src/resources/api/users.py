@@ -2,6 +2,7 @@ from flask import Blueprint
 from flask import request, abort, jsonify
 import flask_restful as Rest
 from werkzeug.exceptions import BadRequest
+from sqlalchemy import or_
 
 import uuid
 import datetime
@@ -12,7 +13,17 @@ import app_singleton
 
 class Users (Rest.Resource):
     def get(self):
-        "Endpoint para procurar usuários - Unico metodo com Basic Auth"
+        "Endpoint para procurar usuários"
+        search = request.args.get("q", type=str, default="")
+        if not search:
+            raise BadRequest("É necessário informar a busca usando o parametro 'q'!")
+
+        users = models.User.query.filter(or_(
+            models.User.nick.like(f'%{search}%'),
+            models.User.nome.like(f"%{search}%")
+        )).all()
+
+        return jsonify([user.to_json() for user in users])
 
         return {
             "testando": "ok1234",
@@ -21,7 +32,7 @@ class Users (Rest.Resource):
     
     @app_singleton.basic_auth.required
     def post(self):
-        "Endpoint para criar Usuario"
+        "Endpoint para criar Usuario - Unico metodo com Basic Auth"
 
         if not request.is_json:
             return abort(400)

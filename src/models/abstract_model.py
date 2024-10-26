@@ -2,7 +2,7 @@ from sqlalchemy import Uuid, DateTime, sql
 
 from app_singleton import db
 
-import uuid, datetime
+import uuid
 
 class AbstractModel (db.Model):
     __abstract__ = True

@@ -1,7 +1,9 @@
-import datetime
 from flask import Blueprint
 from flask import request, jsonify, abort
 import flask_jwt_extended as jwt
+from sqlalchemy import or_
+
+import datetime
 
 from models import User
 import app_singleton
@@ -32,8 +34,10 @@ def get_token():
     username = j.get("username", None)
     password = j.get("password", None)
     
-    user = User.query.filter_by(nick=username).first()\
-        or User.query.filter_by(email=username).first()
+    user = User.query.filter(or_(
+        User.nick == username,
+        User.email == username
+    )).first()
     
     if not user or user.senha != password:
         return abort(401)
