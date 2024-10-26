@@ -1,5 +1,4 @@
 from sqlalchemy import BigInteger, DateTime, sql
-from sqlalchemy.dialects.postgresql import UUID as Uuid
 
 from app_singleton import db
 
@@ -10,7 +9,7 @@ class AbstractModel (db.Model):
     fields = []
     
     id = db.Column(BigInteger, primary_key=True)
-    uuid = db.Column(Uuid, default=lambda: str(uuid.uuid4()), unique=True, nullable=False)
+    uuid = db.Column(db.String(36), default=lambda: str(uuid.uuid4()), unique=True, nullable=False)
     dt_criacao = db.Column(DateTime, default=sql.func.now(), nullable=False)
 
     def to_json(self):
