@@ -25,8 +25,12 @@ class User(AbstractModel):
            * Aí como está acabando o tempo, vou usar desta forma que embora não seja abstrata, é bem prática de se fazer.
            """
 
-        fields = ["uuid", "nick", "nome", "email", "bio"]
-        j = {field: self.__getattribute__(field) for field in fields}
+        j = {
+            "uuid": str(self.uuid)
+        }
+
+        fields = ["nick", "nome", "email", "bio"]
+        j.update({field: self.__getattribute__(field) for field in fields})
 
         j["seguidores"] = len(self.seguidores)
         j["seguindo"] = len(self.seguindo)

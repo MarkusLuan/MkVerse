@@ -2,10 +2,9 @@ from flask import Blueprint
 from flask import request, abort, jsonify
 import flask_restful as Rest
 from werkzeug.exceptions import BadRequest
-from sqlalchemy import or_
+from sqlalchemy import and_, or_
 
 import uuid
-import datetime
 
 import models
 import utils
@@ -14,9 +13,9 @@ import app_singleton
 class Users (Rest.Resource):
     def get(self):
         "Endpoint para procurar usuários"
-        search = request.args.get("q", type=str, default="")
+        search = request.args.get("user", type=str, default="")
         if not search:
-            raise BadRequest("É necessário informar a busca usando o parametro 'q'!")
+            raise BadRequest("É necessário informar a busca usando o parametro 'user'!")
 
         users = models.User.query.filter(or_(
             models.User.nick.like(f'%{search}%'),
@@ -24,11 +23,6 @@ class Users (Rest.Resource):
         )).all()
 
         return jsonify([user.to_json() for user in users])
-
-        return {
-            "testando": "ok1234",
-            "metodo": "get"
-        }
     
     @app_singleton.basic_auth.required
     def post(self):
@@ -79,11 +73,15 @@ class UserInfo (Rest.Resource):
     def get(self, uuid: uuid.UUID):
         "Endpoint para verificar informações do usuário (Nome, Quantidade de Seguidores e Quantos seguem ele)"
 
-        return {
-            "testando": "ok213",
-            "metodo": "get",
-            "uuid": str(uuid)
-        }
+        # TODO: Ajustar para só permitir quem o usuário segue
+        user = models.User.query.filter(
+            models.User.uuid == uuid
+        ).first()
+
+        if user is None:
+            return abort(404)
+
+        return user.to_json()
 
 # Registra endpoint
 Resources = Blueprint("users", __name__, url_prefix="/users")
