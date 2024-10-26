@@ -13,10 +13,14 @@ class Feed (Rest.Resource):
     def get(self):
         "Endpoint para carregar o feed do usuário logado"
 
-        return {
-            "testando": "ok1234",
-            "metodo": "get"
-        }
+        # TODO: Filtrar por:
+        # * Usuario Logado
+        # * Usuarios Seguidos
+        # * Data Remoção = Null
+        logged_user = jwt.get_jwt_identity()
+        feed = models.Feed.query.all()
+
+        return [postagem.to_json() for postagem in feed]
     
     def post(self):
         "Endpoint para criar uma postagem"
