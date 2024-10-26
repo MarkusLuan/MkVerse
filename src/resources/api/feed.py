@@ -20,7 +20,7 @@ class Feed (Rest.Resource):
         # TODO: Fazer uma unica query
         # Obtem o usuario
         user = models.User.query.filter_by(
-            uuid = uuid_logged_user
+            uuid = str(uuid_logged_user)
         ).first()
         if not user:
             return abort(401)
@@ -52,7 +52,7 @@ class Feed (Rest.Resource):
 
         logged_user = jwt.get_jwt_identity()
         user = models.User.query.filter_by(
-            uuid=logged_user
+            uuid = str(logged_user)
         ).first()
 
         if not user:
@@ -78,9 +78,9 @@ class Feed (Rest.Resource):
         feed = models.Feed.query.join(
             models.User, models.User.id == models.Feed.user_id
         ).filter(and_(
-            models.Feed.uuid == uuid_feed,
+            models.Feed.uuid == str(uuid_feed),
             models.Feed.dt_remocao == None,
-            models.User.uuid == logged_user
+            models.User.uuid == str(logged_user)
         )).first_or_404()
 
         feed.dt_remocao = datetime.datetime.now()

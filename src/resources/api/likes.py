@@ -16,7 +16,7 @@ class Likes (Rest.Resource):
 
         uuid_logged_user = jwt.get_jwt_identity()
         user = models.User.query.filter_by(
-            uuid = uuid_logged_user
+            uuid = str(uuid_logged_user)
         ).first()
         if not user:
             return abort(401)

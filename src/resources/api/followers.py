@@ -21,7 +21,7 @@ class Followers (Rest.Resource):
             models.User,
             models.Followers.seguindo_id == models.User.id
         ).filter(
-            models.User.uuid == logged_user
+            models.User.uuid == str(logged_user)
         ).all()
 
         res = {
@@ -41,14 +41,14 @@ class Followers (Rest.Resource):
 
         # Checa e Obtem Usuario Logado
         logged_user = models.User.query.filter_by(
-            uuid = uuid_logged_user
+            uuid = str(uuid_logged_user)
         ).first()
         if not logged_user:
             return abort(401)
         
         # Checa e Obtem Usuario Informado
         user = models.User.query.filter_by(
-            uuid = uuid_user
+            uuid = str(uuid_user)
         ).first_or_404("Usuario não encontrado!")
 
         # Checa se já segue
@@ -87,8 +87,8 @@ class Followers (Rest.Resource):
         ).join(
             user_seguidor, models.Followers.seguidor
         ).filter(
-            user_seguindo.uuid == uuid_user,
-            user_seguidor.uuid == uuid_logged_user,
+            user_seguindo.uuid == str(uuid_user),
+            user_seguidor.uuid == str(uuid_logged_user),
         ).first_or_404("Você não segue este usuário!")
 
         # Hack para carregar os atributos Lazy Load
