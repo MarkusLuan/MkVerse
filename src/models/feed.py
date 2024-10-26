@@ -1,4 +1,4 @@
-from sqlalchemy import BigInteger, Uuid, DateTime, ForeignKey
+from sqlalchemy import BigInteger, DateTime, ForeignKey
 
 from .abstract_model import AbstractModel
 from app_singleton import db
@@ -8,7 +8,7 @@ class Feed (AbstractModel):
 
     dt_remocao = db.Column(DateTime, nullable=True)
     texto = db.Column(db.String, nullable=False)
-    uuid_imagem = db.Column(Uuid, unique=True, nullable=True)
+    uuid_imagem = db.Column(db.Uuid, unique=True, nullable=True)
     likes = db.Column(db.Integer, default=0, nullable=False)
     user_id = db.Column(BigInteger, ForeignKey("user.id"), nullable=False)
     

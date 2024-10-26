@@ -1,5 +1,4 @@
 from sqlalchemy import BigInteger, ForeignKey
-from sqlalchemy.orm import Mapped
 
 from .abstract_model import AbstractModel
 from app_singleton import db

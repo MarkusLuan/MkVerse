@@ -1,5 +1,5 @@
 from sqlalchemy import DateTime
-from sqlalchemy.orm import Mapped, relationship
+from sqlalchemy.orm import relationship
 
 from .abstract_model import AbstractModel
 from app_singleton import db
