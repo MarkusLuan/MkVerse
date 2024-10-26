@@ -16,11 +16,14 @@ class Feed (Rest.Resource):
         "Endpoint para carregar o feed do usuário logado"
 
         # TODO: Filtrar por:
-        # * Usuario Logado
-        # * Usuarios Seguidos
-        # * Data Remoção = Null
+        # * Usuario Logado - OK
+        # * Usuarios Seguidos - FALTANDO
+        # * Data Remoção = Null - OK
         logged_user = jwt.get_jwt_identity()
-        feed = models.Feed.query.all()
+        feed = models.Feed.query.filter(and_(
+            models.Feed.dt_remocao == None,
+            models.User.uuid == logged_user
+        )).all()
 
         return [postagem.to_json() for postagem in feed]
     
