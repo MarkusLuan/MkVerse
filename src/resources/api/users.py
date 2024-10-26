@@ -64,12 +64,12 @@ class Users (Rest.Resource):
         }
 
 class UserInfo (Rest.Resource):
-    def get(self, uuid: uuid.UUID):
+    def get(self, uuid_user: uuid.UUID):
         "Endpoint para verificar informações do usuário (Nome, Quantidade de Seguidores e Quantos seguem ele)"
 
         # TODO: Ajustar para só permitir quem o usuário segue
         user = models.User.query.filter(
-            models.User.uuid == uuid
+            models.User.uuid == str(uuid_user)
         ).first()
 
         if user is None:
@@ -81,4 +81,4 @@ class UserInfo (Rest.Resource):
 Resources = Blueprint("users", __name__, url_prefix="/users")
 api = Rest.Api(Resources)
 api.add_resource(Users, "/")
-api.add_resource(UserInfo, "/<uuid:uuid>")
+api.add_resource(UserInfo, "/<uuid:uuid_user>")
