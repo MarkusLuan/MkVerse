@@ -11,6 +11,18 @@ import models
 import app_singleton
 
 class Likes (Rest.Resource):
+    def get(self, uuid_feed: uuid.UUID):
+        "Endpoint para listar curtidas"
+        
+        likes = models.Likes.query.join(
+            models.Feed, models.Feed.id == models.Likes.feed_id
+        ).filter(and_(
+            # models.Feed.uuid != None,## str(uuid_feed),
+            models.Feed.dt_remocao == None
+        )).all()
+        
+        return [like.to_json() for like in likes]
+    
     def post(self, uuid_feed: uuid.UUID):
         "Endpoint para curtir uma postagem"
 
