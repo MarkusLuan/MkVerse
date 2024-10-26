@@ -2,8 +2,10 @@ from flask import Blueprint
 from flask import request, abort
 import flask_restful as Rest
 import flask_jwt_extended as jwt
+from sqlalchemy import and_
 
 import uuid
+import datetime
 
 import models
 import utils
@@ -54,12 +56,20 @@ class Feed (Rest.Resource):
         return feed.to_json()
     
     def delete(self, uuid: uuid.UUID):
-        "Endpoint para deletar postagem"
+        "Endpoint para deletar postagem de forma virtual"
 
-        return {
-            "testando": "ok1234",
-            "metodo": "delete"
-        }
+        logged_user = jwt.get_jwt_identity()
+        feed = models.Feed.query.filter(and_(
+            models.Feed.uuid == uuid,
+            models.Feed.dt_remocao == None,
+            models.User.uuid == logged_user
+        )).first_or_404()
+
+        feed.dt_remocao = datetime.datetime.now()
+        app_singleton.db.session.merge(feed)
+        app_singleton.db.session.commit()
+
+        return feed.to_json()
 
 # Registra endpoint
 Resources = Blueprint("feed", __name__, url_prefix="/feed")
