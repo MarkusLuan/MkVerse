@@ -255,6 +255,41 @@
 					"response": []
 				},
 				{
+					"name": "Carregar Imagem da Postagem",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyOTk4NjE3NSwianRpIjoiZDgyOTQ3MmMtZjJiZi00ZjBiLTgwNjctYTA1ZjFhMjhhODU0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImJjM2Q3YTdlLTBmMDQtNDVmYi1hZDY1LWExMzI0ZGFlODJiOSIsIm5iZiI6MTcyOTk4NjE3NSwiY3NyZiI6IjljYzc3MDBmLTA4ZTktNDE5Yi05NTQ3LTlkOGRlZDg3YTM1NCIsImV4cCI6MTcyOTk4OTc3NX0.MX8xVywKFriMj2pS8f9FiZYasccSrZNccosG2huvOME",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWxhZGRpbjpvcGVuc2VzYW1l",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/feed/e26b6a65-afae-439a-a721-7b0cf6bbde14/img",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"feed",
+								"e26b6a65-afae-439a-a721-7b0cf6bbde14",
+								"img"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Criar Postagem",
 					"request": {
 						"auth": {
@@ -283,6 +318,54 @@
 									"language": "json"
 								}
 							}
+						},
+						"url": {
+							"raw": "{{url}}/feed",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"feed"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar Postagem com Imagem",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyOTk4NjE3NSwianRpIjoiZDgyOTQ3MmMtZjJiZi00ZjBiLTgwNjctYTA1ZjFhMjhhODU0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImJjM2Q3YTdlLTBmMDQtNDVmYi1hZDY1LWExMzI0ZGFlODJiOSIsIm5iZiI6MTcyOTk4NjE3NSwiY3NyZiI6IjljYzc3MDBmLTA4ZTktNDE5Yi05NTQ3LTlkOGRlZDg3YTM1NCIsImV4cCI6MTcyOTk4OTc3NX0.MX8xVywKFriMj2pS8f9FiZYasccSrZNccosG2huvOME",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWxhZGRpbjpvcGVuc2VzYW1l",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "texto",
+									"value": "testando post com imagem",
+									"type": "text"
+								},
+								{
+									"key": "imagem",
+									"type": "file",
+									"src": "/C:/Users/marku/Pictures/2018-01-18/001.jpg"
+								}
+							]
 						},
 						"url": {
 							"raw": "{{url}}/feed",
