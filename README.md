@@ -1,4 +1,4 @@
-# Projeto para uma Vaga de Programador Python
+# Projeto para uma Vaga de Programador Python - B2Bit
 
 O projeto possui 3 Branchs:
 - A master - Que possui a documentação e a inicialização do projeto
