@@ -1,0 +1,28 @@
+services:
+    mkverse_db:
+        image: postgres:16
+        container_name: mkverse_db
+        ports:
+            - "5432:5432"
+        environment: 
+            - POSTGRES_DB=mkverse_db
+            - POSTGRES_USER=mkverse_db_user
+            - POSTGRES_PASSWORD=Cnef[zx9CQ3PfH
+        volumes:
+            - ./db:/var/lib/postgresql/data
+        networks: 
+            - mkverse_network
+
+    mkverse_server:
+        build: "."
+        depends_on: 
+            - mkverse_db
+        container_name: mkverse_server
+        ports:
+            - "80:80"
+        networks: 
+            - mkverse_network
+
+networks: 
+    mkverse_network:
+        driver: bridge
