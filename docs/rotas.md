@@ -2,12 +2,12 @@
 Exportei o postman.json, e pedi ao chatGPT um código para converter o postman.json em Markdown
 
 ## Variaveis
-** url = http://localhost/api
-** TOKEN => Token obtido pelo /auth/token
-** REFRESH_TOKEN => Refresh_token obtido junto com o token
+* url = http://localhost/api
+* TOKEN => Token obtido pelo /auth/token
+* REFRESH_TOKEN => Refresh_token obtido junto com o token
 
 Caso queira poderá usar a url que disponibilizei no servidor também:
-** url = https://teste.mkverse.mkgcriacoes.com.br/api (observar que não subi como HTTPS)
+* url = https://teste.mkverse.mkgcriacoes.com.br/api (observar que não subi como HTTPS)
 
 ---
 
@@ -22,7 +22,7 @@ Caso queira poderá usar a url que disponibilizei no servidor também:
 **Método:** `POST`
 **Endpoint:** `{{url}}/auth/refresh`
 **Headers:**
-- `Authorization`: `Bearer {{Refresh_Token}}`
+- `Authorization`: `Bearer {{REFRESH_TOKEN}}`
 
 ---
 ## Pesquisar Usuários
