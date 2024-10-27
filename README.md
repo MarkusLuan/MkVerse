@@ -45,6 +45,7 @@ O ultimo parametro é opcional e são aceitos:
 ### Documentações
 - [Sobre o Projeto](./docs/README.md)
 - [Documentação em Postman](./docs/postman.json)
+- [Rotas - Extraido do Postman](./docs/rotas.md)
 - [Estrutura do Projeto](./docs/estrutura_projeto.md)
 
 ---
