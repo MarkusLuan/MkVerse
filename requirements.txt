@@ -3,6 +3,7 @@ flask_restful
 flask-jwt-extended
 Flask-SQLAlchemy
 Flask-BasicAuth
+flask-migrate
 PyJWT
 psycopg2-binary
 python-dotenv

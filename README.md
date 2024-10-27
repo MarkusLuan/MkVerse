@@ -29,6 +29,19 @@ Infelizmente, por motivos da correria de trabalho e tempo tive que migrar o proj
 O banco de dados está em Postgresql 16, porém a estrutura foi desenhada usando o MySQL Workbench
 ![Estrutura do Banco de Dados](./docs/estrutura_db.png)
 
+### Fake-migrate - Apaga o banco e sobe uma cópia
+* Queria usar o flask-migrate, mas deu um bug e estou sem tempo para resolver
+
+Para iniciar o banco basta ir na pasta [src](./src/) e executar o comando
+```shell
+python3 migrate.py ["config.development"]
+```
+O ultimo parametro é opcional e são aceitos:
+- "config.development"
+- "config.production"
+
+---
+
 ### Documentações
 - [Sobre o Projeto](./docs/README.md)
 - [Documentação em Postman](./docs/postman.json)
