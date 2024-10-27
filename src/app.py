@@ -1,7 +1,5 @@
 from flask import Flask
-from flask_jwt_extended import JWTManager
 
-from models import *
 from resources import Resources
 from error_handler import ErrorHandler
 import app_singleton
